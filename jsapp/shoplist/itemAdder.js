@@ -5,7 +5,7 @@ import { StyleSheet, View, TextInput, Button  } from 'react-native';
 export default class ItemAdder extends Component {
     constructor(props) {
         super(props);
-        this.state = { text: 'Useless Placeholder' };
+        this.state = { text:'' };
     }
 
     onAddPressed = () => {
@@ -18,6 +18,7 @@ export default class ItemAdder extends Component {
                 <TextInput style={styles.itemName}
                     onChangeText={(text) => this.setState({text})}
                     value={this.state.text}
+                    placeholder={"Enter name..."}
                 />
 
                 <Button

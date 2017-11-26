@@ -1,10 +1,10 @@
 import { connect } from 'react-redux';
-import { toggleItem } from './shoplistActions';
+import { toggleItem, removeItem } from './shoplistActions';
 import ShopListItem from './shoplistItem';
 import get from 'lodash/get';
 
 function mapStateToProps(state, ownProps) {
-    const selected = get(state, `shoplist.selection[${ownProps.id}]`, false);
+    const selected = get(state, `shoplist.selection[${ownProps.item.id}]`, false);
     return {
         selected: selected
     };
@@ -13,7 +13,10 @@ function mapStateToProps(state, ownProps) {
 function mapDispatchToProps(dispatch, ownProps) {
     return {
         toggleItem() {
-            dispatch(toggleItem(ownProps.id));
+            dispatch(toggleItem(ownProps.item.id));
+        },
+        remove() {
+            dispatch(removeItem(ownProps.item.id));
         }
     };
 }

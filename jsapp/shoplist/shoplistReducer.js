@@ -1,6 +1,7 @@
-import { TOGGLE_ITEM, ADD_ITEM } from './shoplistActions';
+import { TOGGLE_ITEM, ADD_ITEM, REMOVE_ITEM } from './shoplistActions';
 import makeId from '../utils/makeId';
 import get from 'lodash/get';
+import filter from 'lodash/filter';
 
 export default function shoplist (state = {}, action) {
     switch (action.type) {
@@ -19,6 +20,12 @@ export default function shoplist (state = {}, action) {
                 id: makeId(),
                 name: action.itemValue
             }])
+        });
+    }
+    case REMOVE_ITEM: {
+        const items = get(state, 'items', []);
+        return Object.assign({}, state, {
+            items:  filter(items, elem => elem.id !== action.itemId)
         });
     }
     default:
