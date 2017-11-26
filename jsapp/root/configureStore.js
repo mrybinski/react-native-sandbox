@@ -1,6 +1,7 @@
 import { createStore } from 'redux';
 import makeId from '../utils/makeId';
 import rootReducer from './reducers';
+import { persistStore } from 'redux-persist';
 
 const preloadedState ={ 
     shoplist: {
@@ -20,5 +21,6 @@ export default function configureStore () {
         rootReducer,
         preloadedState
     );
-    return store;
+
+    return { persistor: persistStore(store), store };
 }
