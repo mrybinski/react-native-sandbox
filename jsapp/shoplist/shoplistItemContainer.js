@@ -1,9 +1,10 @@
 import { connect } from 'react-redux';
 import { toggleItem } from './shoplistActions';
 import ShopListItem from './shoplistItem';
+import get from 'lodash/get';
 
 function mapStateToProps(state, ownProps) {
-    const selected = state.shoplist.getIn(['selection', ownProps.id]) || false;
+    const selected = get(state, `shoplist.selection[${ownProps.id}]`, false);
     return {
         selected: selected
     };

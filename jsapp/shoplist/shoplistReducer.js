@@ -1,22 +1,26 @@
 import { TOGGLE_ITEM, ADD_ITEM } from './shoplistActions';
-import { Map, List } from 'immutable';
 import makeId from '../utils/makeId';
+import get from 'lodash/get';
 
-export default function shoplist (state = Map({}), action) {
+export default function shoplist (state = {}, action) {
     switch (action.type) {
-    case TOGGLE_ITEM: 
-        return state.update('selection', selection => {
-            selection = selection || Map({});
-            return selection.update(action.itemId, selected => !selected);
+    case TOGGLE_ITEM: {
+        const selected = get(state, `selection[${action.itemId}]`, false);
+        return Object.assign({}, state, {
+            selection: Object.assign({}, state.selection, {
+                [action.itemId]: !selected
+            })
         });
-    case ADD_ITEM: 
-        return state.update('items', items => {
-            items = items || List([]);
-            return items.push({
+    }
+    case ADD_ITEM: {
+        const items = get(state, 'items', []);
+        return Object.assign({}, state, {
+            items: items.concat([{
                 id: makeId(),
                 name: action.itemValue
-            });
+            }])
         });
+    }
     default:
         return state;
     }

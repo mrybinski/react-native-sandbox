@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import ShopListItem from './shoplistItemContainer';
 import ItemAdder from './itemAdderContainer';
 import PropTypes from 'prop-types';
-import { is, List } from 'immutable';
 
 import { StyleSheet, ListView, View } from 'react-native';
 
@@ -10,10 +9,12 @@ export default class ShopList extends Component {
     constructor (props) {
         super(props);
         let ds = new ListView.DataSource({
-            rowHasChanged: (r1, r2) => !is(r1, r2)
+            rowHasChanged: (r1, r2) => {
+                return r1.id !== r2.id;
+            }
         });
 
-        ds = ds.cloneWithRows(this.props.items.toArray());
+        ds = ds.cloneWithRows(this.props.items);
 
         this.state = {
             dataSource: ds
@@ -22,7 +23,7 @@ export default class ShopList extends Component {
 
     componentWillReceiveProps(nextProps) {
         this.setState({
-            dataSource: this.state.dataSource.cloneWithRows(nextProps.items.toArray())
+            dataSource: this.state.dataSource.cloneWithRows(nextProps.items)
         });
     }
 
@@ -48,7 +49,7 @@ export default class ShopList extends Component {
 }
 
 ShopList.propTypes = {
-    items: PropTypes.instanceOf(List)
+    items: PropTypes.array.isRequired
 };
 
 
