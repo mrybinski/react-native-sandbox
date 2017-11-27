@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { StyleSheet, View, TextInput, Button  } from 'react-native';
+import { StyleSheet, View, TextInput  } from 'react-native';
+import { Icon } from 'react-native-elements';
 
 export default class ItemAdder extends Component {
     constructor(props) {
@@ -10,9 +11,15 @@ export default class ItemAdder extends Component {
 
     onAddPressed = () => {
         this.props.addItem(this.state.text);
+        this.setState({
+            text: ''
+        });
     }
 
     render () {
+        const disabled = !this.state.text;
+        const buttonColor = disabled ? "#c6c6c6" : "#6c6d6c";
+
         return (
             <View style={styles.container}>
                 <TextInput style={styles.itemName}
@@ -21,10 +28,11 @@ export default class ItemAdder extends Component {
                     placeholder={"Enter name..."}
                 />
 
-                <Button
+                <Icon
+                    color={buttonColor} 
+                    name='add-circle'
                     onPress={this.onAddPressed}
-                    title="Add"
-                    color="#841584"
+                    disabled={disabled}
                 />
             </View>
         );

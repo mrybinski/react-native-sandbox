@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import { StyleSheet, View, CheckBox, Text, Button  } from 'react-native';
+import { StyleSheet, View, CheckBox, Text  } from 'react-native';
+import { Icon } from 'react-native-elements';
 
 export default class ShoplistItem extends PureComponent {
     onChange = () => {
@@ -8,11 +9,11 @@ export default class ShoplistItem extends PureComponent {
     }
 
     render () {
-        console.warn('rerender');
         return (
             <View style={styles.container}>
-                <CheckBox value={this.props.selected} onValueChange={this.onChange}/><Text> {this.props.item.name} </Text>
-                <Button onPress={this.props.remove} title={"remove"} />
+                <CheckBox value={this.props.selected} onValueChange={this.onChange}/>
+                <Text style={styles.text}> {this.props.item.name} </Text>
+                <Icon style={styles.icon} onPress={this.props.remove} color={"#6c6d6c"} name='cancel' />
             </View>
         );
     }
@@ -34,5 +35,12 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'flex-start',
         alignItems: 'center'
+    },
+    text: {
+        flex: 2,
+    },
+    icon: {
+        flex: -1,
+        marginHorizontal: 20
     }
 });

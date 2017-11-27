@@ -10,13 +10,7 @@ export default class ShopList extends Component {
         super(props);
         let ds = new ListView.DataSource({
             rowHasChanged: (r1, r2) => {
-                console.warn(r1.id !== r2.id);
                 return r1.id !== r2.id;
-            },
-            rowShouldUpdate: (sectionIndex, rowIndex) => {
-                console.warn(sectionIndex);
-                console.warn(rowIndex);
-                return true;
             }
         });
 
