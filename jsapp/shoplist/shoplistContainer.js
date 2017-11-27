@@ -4,8 +4,10 @@ import get from 'lodash/get';
 
 function mapStateToProps(state) {
     const items = get(state, 'shoplist.items', []);
+    const selection = get(state, 'shoplist.selection', {});
     return {
-        items
+        items,
+        selection
     };
 }
 

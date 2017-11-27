@@ -12,7 +12,7 @@ export default class ShoplistItem extends PureComponent {
         return (
             <View style={styles.container}>
                 <CheckBox value={this.props.selected} onValueChange={this.onChange}/>
-                <Text style={styles.text}> {this.props.item.name} </Text>
+                <Text style={styles.text}> {this.props.name} </Text>
                 <Icon style={styles.icon} onPress={this.props.remove} color={"#6c6d6c"} name='cancel' />
             </View>
         );
@@ -20,10 +20,8 @@ export default class ShoplistItem extends PureComponent {
 }
 
 ShoplistItem.propTypes = {
-    item: PropTypes.shape({
-        id: PropTypes.string.isRequired,
-        name: PropTypes.string.isRequired,
-    }).isRequired,
+    id: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
     selected: PropTypes.bool.isRequired,
     toggleItem: PropTypes.func.isRequired,
     remove: PropTypes.func.isRequired,
