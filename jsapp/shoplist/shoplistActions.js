@@ -12,3 +12,8 @@ export const REMOVE_ITEM = 'REMOVE_ITEM';
 export function removeItem(itemId) {
     return { type: REMOVE_ITEM, itemId };
 }
+
+export const UPDATE_ITEM_NAME = 'UPDATE_ITEM_NAME';
+export function updateItemName(itemId, newName){
+    return { type: UPDATE_ITEM_NAME, itemId, newName };
+}

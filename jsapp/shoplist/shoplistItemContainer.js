@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { toggleItem, removeItem } from './shoplistActions';
+import { toggleItem, removeItem, updateItemName } from './shoplistActions';
 import ShopListItem from './shoplistItem';
 
 
@@ -10,6 +10,9 @@ function mapDispatchToProps(dispatch, ownProps) {
         },
         remove() {
             dispatch(removeItem(ownProps.id));
+        },
+        updateItemName(newName) {
+            dispatch(updateItemName(ownProps.id, newName));
         }
     };
 }

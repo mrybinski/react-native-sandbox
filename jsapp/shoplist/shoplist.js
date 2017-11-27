@@ -6,19 +6,20 @@ import PropTypes from 'prop-types';
 import { StyleSheet, ListView, View } from 'react-native';
 import partition from 'lodash/partition';
 import get from 'lodash/get';
+import sortBy from 'lodash/sortBy';
 
 export default class ShopList extends Component {
     constructor (props) {
         super(props);
         const toDoDataSource = new ListView.DataSource({
             rowHasChanged: (r1, r2) => {
-                return r1.id !== r2.id;
+                return r1 !== r2;
             }
         });
 
         const completedDataSource = new ListView.DataSource({
             rowHasChanged: (r1, r2) => {
-                return r1.id !== r2.id;
+                return r1 !== r2;
             }
         });
 
@@ -30,10 +31,13 @@ export default class ShopList extends Component {
     }
 
     calculateNextState(nextProps, toDoDataSource, completedDataSource){
-        const parts = partition(nextProps.items, it => get(nextProps.selection, it.id, false));
+        const parts = partition(nextProps.items, it => get(nextProps, `selection[${it.id}]`, false));
+        const toDos = sortBy(parts[1] || [], 'order');
+        const completed = sortBy(parts[0] || [], 'order');
+
         return {
-            toDoDataSource: toDoDataSource.cloneWithRows(parts[1] || []),
-            completedDataSource: completedDataSource.cloneWithRows(parts[0] || []),
+            toDoDataSource: toDoDataSource.cloneWithRows(toDos),
+            completedDataSource: completedDataSource.cloneWithRows(completed),
         };
     }
 
