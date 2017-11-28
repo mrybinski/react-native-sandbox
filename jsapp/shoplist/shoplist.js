@@ -34,7 +34,6 @@ export default class ShopList extends Component {
         const parts = partition(nextProps.items, it => get(nextProps, `selection[${it.id}]`, false));
         const toDos = sortBy(parts[1] || [], 'order');
         const completed = sortBy(parts[0] || [], 'order');
-
         return {
             toDoDataSource: toDoDataSource.cloneWithRows(toDos),
             completedDataSource: completedDataSource.cloneWithRows(completed),
