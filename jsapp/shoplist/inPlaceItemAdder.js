@@ -27,7 +27,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     text: {
-        flex: 2,
+        flex: -1,
         color: "#6c6d6c",
     },
     icon: {

@@ -24,7 +24,7 @@ export default class ShopList extends Component {
         const parts = partition(nextProps.items, it => get(nextProps, `selection[${it.id}]`, false));
         const toDos = sortBy(parts[1] || [], 'order');
         const completed = sortBy(parts[0] || [], 'order');
-
+        
         toDos.push({id: 'adder', key: 'adder'});
 
         return {
@@ -53,6 +53,7 @@ export default class ShopList extends Component {
                 renderItem={this.renderItem}
                 renderSectionHeader={this.renderSection}
                 sections={sections}
+                style={styles.list}
             />
         );
     }
@@ -89,40 +90,8 @@ ShopList.propTypes = {
 
 
 const styles = StyleSheet.create({
-    container2: {
-        flex: 5,
-        backgroundColor: '#F5FCFF',
-        
-    },
-    container: {
-        flex: 1,
-        flexDirection: 'column',
-        justifyContent: 'flex-start',
-        alignItems: 'flex-start',
-        backgroundColor: '#F5FCFF',
-        
-    },
-    listView: {
-        flex: 3,
-        flexGrow: 3,
-        backgroundColor: '#F5FCFF',
-        alignSelf: 'stretch',
-    },
-    completedListView: {
-        flex: 1,
-        alignSelf: 'stretch',
-    },
-
-    containerCompleted: {
-        borderTopWidth: 0.5,
-        borderTopColor: "#c6c6c6",
-        flex: 1,
-        flexGrow: 1,
-        flexShrink: 2,
-        flexDirection: 'column',
-        backgroundColor: '#F5FCFF',
-        alignSelf: 'stretch',
-        paddingTop: 5,
-        paddingBottom: 5
-    },
+    list: {
+        marginHorizontal: 20,
+        marginVertical: 10
+    }
 });
