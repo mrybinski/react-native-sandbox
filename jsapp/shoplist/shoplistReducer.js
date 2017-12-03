@@ -17,9 +17,11 @@ export default function shoplist (state = {}, action) {
     }
     case ADD_ITEM: {
         const items = get(state, 'items', []);
+        const nextId = makeId();
         return Object.assign({}, state, {
             items: items.concat([{
-                id: makeId(),
+                id: nextId,
+                key: nextId,
                 name: action.itemValue,
                 order: items.length
             }])

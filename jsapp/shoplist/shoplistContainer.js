@@ -1,6 +1,7 @@
 import { connect } from 'react-redux';
 import ShopList from './shoplist';
 import get from 'lodash/get';
+import { addItem } from './shoplistActions';
 
 function mapStateToProps(state) {
     const items = get(state, 'shoplist.items', []);
@@ -11,4 +12,12 @@ function mapStateToProps(state) {
     };
 }
 
-export default connect(mapStateToProps)(ShopList);
+function mapDispatchToProps(dispatch) {
+    return {
+        addItem() {
+            dispatch(addItem(''));
+        }
+    };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ShopList);
