@@ -15,7 +15,6 @@ export default class ShoplistItem extends PureComponent {
     }
     
     componentWillUnmount () {
-        this.keyboardDidShowListener.remove();
         this.keyboardDidHideListener.remove();
     }
 

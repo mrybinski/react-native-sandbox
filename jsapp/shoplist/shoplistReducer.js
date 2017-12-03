@@ -1,9 +1,11 @@
-import { TOGGLE_ITEM, ADD_ITEM, REMOVE_ITEM, UPDATE_ITEM_NAME } from './shoplistActions';
+import { TOGGLE_ITEM, ADD_ITEM, REMOVE_ITEM, UPDATE_ITEM_NAME, REMOVE_SELECTED } from './shoplistActions';
 import makeId from '../utils/makeId';
 import get from 'lodash/get';
 import filter from 'lodash/filter';
 import find from 'lodash/find';
 import omit from 'lodash/omit';
+import reject from 'lodash/reject';
+import maxBy from 'lodash/maxBy';
 
 export default function shoplist (state = {}, action) {
     switch (action.type) {
@@ -18,12 +20,13 @@ export default function shoplist (state = {}, action) {
     case ADD_ITEM: {
         const items = get(state, 'items', []);
         const nextId = makeId();
+        const maxOrderItem = maxBy(items, 'order');
         return Object.assign({}, state, {
             items: items.concat([{
                 id: nextId,
                 key: nextId,
                 name: action.itemValue,
-                order: items.length
+                order: maxOrderItem ? maxOrderItem.order + 1 : 1
             }])
         });
     }
@@ -33,6 +36,14 @@ export default function shoplist (state = {}, action) {
         return Object.assign({}, state, {
             items:  filter(items, elem => elem.id !== action.itemId),
             selection: omit(selection, action.itemId)
+        });
+    }
+    case REMOVE_SELECTED: {
+        const items = get(state, 'items', []);
+        const nextItems = reject(items,it =>  get(state, `selection[${it.id}]`, false));
+        return Object.assign({}, state, {
+            items:  nextItems,
+            selection: {}
         });
     }
     case UPDATE_ITEM_NAME: {

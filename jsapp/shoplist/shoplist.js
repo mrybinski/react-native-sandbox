@@ -26,7 +26,6 @@ export default class ShopList extends Component {
         const completed = sortBy(parts[0] || [], 'order');
         
         toDos.push({id: 'adder', key: 'adder'});
-
         return {
             toDos,
             completed
@@ -65,7 +64,7 @@ export default class ShopList extends Component {
         }
         
         return (
-            <CompletedSectionHeader collapsed={this.state.collapsed} itemsCount={this.state.completed.length} onToggle={this.collapseToggle}/>
+            <CompletedSectionHeader remove={this.props.removeSelected} collapsed={this.state.collapsed} itemsCount={this.state.completed.length} onToggle={this.collapseToggle}/>
         );
     }
 
@@ -85,7 +84,8 @@ export default class ShopList extends Component {
 ShopList.propTypes = {
     items: PropTypes.array.isRequired,
     selection: PropTypes.object.isRequired,
-    addItem: PropTypes.func.isRequired
+    addItem: PropTypes.func.isRequired,
+    removeSelected: PropTypes.func.isRequired,
 };
 
 

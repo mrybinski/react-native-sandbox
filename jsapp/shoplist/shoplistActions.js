@@ -17,3 +17,8 @@ export const UPDATE_ITEM_NAME = 'UPDATE_ITEM_NAME';
 export function updateItemName(itemId, newName){
     return { type: UPDATE_ITEM_NAME, itemId, newName };
 }
+
+export const REMOVE_SELECTED = 'REMOVE_SELECTED';
+export function removeSelected() {
+    return { type: REMOVE_SELECTED };
+}

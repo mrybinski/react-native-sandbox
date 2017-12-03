@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import ShopList from './shoplist';
 import get from 'lodash/get';
-import { addItem } from './shoplistActions';
+import { addItem, removeSelected } from './shoplistActions';
 
 function mapStateToProps(state) {
     const items = get(state, 'shoplist.items', []);
@@ -16,6 +16,9 @@ function mapDispatchToProps(dispatch) {
     return {
         addItem() {
             dispatch(addItem(''));
+        },
+        removeSelected() {
+            dispatch(removeSelected());
         }
     };
 }

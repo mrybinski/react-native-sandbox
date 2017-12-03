@@ -11,6 +11,8 @@ export default class CompletedSectionHeader extends PureComponent {
             <View style={styles.container}>
                 <Icon containerStyle={styles.icon} color={"#6c6d6c"} name={icon} onPress={this.props.onToggle}/>
                 <Text style={styles.text} onPress={this.props.onToggle} >{`${this.props.itemsCount} completed items`}</Text>
+                {this.props.collapsed ? <Icon style={styles.removeIcon} onPress={this.props.remove} color={"#6c6d6c"} name='cancel' />
+                    : null}
             </View>
         );
     }
@@ -20,6 +22,7 @@ CompletedSectionHeader.propTypes = {
     itemsCount: PropTypes.number.isRequired,
     collapsed: PropTypes.bool.isRequired,
     onToggle: PropTypes.func.isRequired,
+    remove: PropTypes.func.isRequired,
 };
 
 const styles = StyleSheet.create({
@@ -40,5 +43,9 @@ const styles = StyleSheet.create({
     icon: {
         flex: -1,
         paddingHorizontal: 3
+    },
+    removeIcon: {
+        flex: -1,
+        paddingHorizontal: 20
     }
 });
